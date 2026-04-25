@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wylie High School Pure Gold Band — Abilene, TX. 2026-27 Season: Into the Unknown.">
+  <title>Pure Gold Band | Wylie High School</title>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  TAILWIND CDN — used for layout + STANDARD colors only       ║
+  ║  Brand colors (Wylie purple #702082 + gold #FFD700) are      ║
+  ║  applied via inline style="..." so they ALWAYS render        ║
+  ║  even if the CDN has any issue with custom color classes.    ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  CONTRAST LAW — applied site-wide, ZERO exceptions           ║
+  ║                                                              ║
+  ║  LIGHT SURFACES (white, gray-100):                           ║
+  ║    Headlines  → text-black font-bold                         ║
+  ║    Body copy  → text-black font-medium                       ║
+  ║    Hint copy  → text-gray-900 font-medium  (rare)            ║
+  ║    BANNED     → text-gray-500/600/700/800 as standalone     ║
+  ║                                                              ║
+  ║  DARK SURFACES (black, gray-900, brand purple):              ║
+  ║    All text   → text-white font-medium  (NO grays)           ║
+  ║    BANNED     → text-gray-* of any value                     ║
+  ║                                                              ║
+  ║  BRAND COLORS:                                               ║
+  ║    Wylie Purple #702082 — applied via inline style           ║
+  ║    Wylie Gold   #FFD700 — applied via inline style           ║
+  ║    Dark Purple  #4d155a — applied via inline style           ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <style>
+    /* ── Brand color tokens — used in inline styles below ── */
+    :root {
+      --wylie-purple:      #702082;  /* Primary brand purple */
+      --wylie-purple-dark: #4d155a;  /* Darker purple — better contrast as text on white */
+      --wylie-gold:        #FFD700;  /* Primary brand gold */
+      --wylie-gold-dark:   #c9a800;  /* Hover state for gold buttons */
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    /* Body: black text, 16px, weight 500 (medium) — ALWAYS readable */
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+      color: #000;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ── Heading font family ── */
+    .ff-display { font-family: 'Oswald', sans-serif; }
+    .ff-body    { font-family: 'DM Sans', sans-serif; }
+
+    /* ── Brand color helpers ── */
+    .bg-purple    { background: var(--wylie-purple); }
+    .bg-purple-d  { background: var(--wylie-purple-dark); }
+    .bg-gold      { background: var(--wylie-gold); }
+    .text-purple  { color: var(--wylie-purple); }
+    .text-purpleD { color: var(--wylie-purple-dark); }
+    .text-gold    { color: var(--wylie-gold); }
+    .border-purple{ border-color: var(--wylie-purple); }
+    .border-gold  { border-color: var(--wylie-gold); }
+
+    /* ── Announcement banner ── */
+    #announcement-banner          { display: none; }
+    #announcement-banner.visible  { display: flex; }
+
+    /* ── Accordion ── */
+    .acc-body          { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+    .acc-body.open     { max-height: 5000px; }
+    .acc-chevron       { transition: transform .3s ease; }
+    .acc-chevron.open  { transform: rotate(180deg); }
+
+    /* ── Gold gradient divider ── */
+    .gold-bar {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--wylie-gold), transparent);
+    }
+
+    /* ── Section eyebrow label ──
+       Uses dark purple (#4d155a) on light bg = ~12:1 contrast.
+       Bold + uppercase + letter-spaced for clear scan-ability. */
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;   /* 14px */
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wylie-purple-dark);
+    }
+
+    /* Eyebrow variant for dark backgrounds — gold on dark = high contrast */
+    .eyebrow-d {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wylie-gold);
+    }
+
+    /* ── Card hover lift ── */
+    .lift { transition: transform .2s, box-shadow .2s; }
+    .lift:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.18); }
+
+    /* ── Hero ── */
+    .hero-grad {
+      background: linear-gradient(140deg,
+        #000000 0%,
+        #15001f 25%,
+        #2e0048 50%,
+        #4d155a 75%,
+        #702082 100%);
+    }
+
+    /* ── Director avatar ── */
+    .avatar {
+      width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--wylie-purple), var(--wylie-gold));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem; font-weight: 700; color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    }
+
+    /* ── Active nav highlight ── */
+    .nav-a.active { color: var(--wylie-gold) !important; }
+
+    /* ── Calendar iframe ── */
+    #cal-frame { border: none; width: 100%; height: 600px; display: block; }
+    @media (max-width: 640px) { #cal-frame { height: 440px; } }
+
+    /* ── JotForm iframe ── */
+    #jotform-frame { border: none; width: 100%; min-height: 700px; display: block; }
+    @media (max-width: 640px) { #jotform-frame { min-height: 580px; } }
+
+    /* ──────────────────────────────────────────────────────────
+       HANDBOOK TABLES — high-contrast styling
+       ─────────────────────────────────────────────────────────
+       Header row:  purple bg + white text
+       Body rows:   white bg + black text (alternating gray-100)
+       Section rows: black bg + white text
+       Border:      2px solid #000 around entire table
+       ────────────────────────────────────────────────────────── */
+    .pg-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+    .pg-table th {
+      background: var(--wylie-purple);
+      color: #ffffff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .pg-table td { padding: 12px 16px; color: #000000; font-weight: 500; }
+    .pg-table tbody tr:nth-child(odd)  td { background: #f3f4f6; }  /* gray-100 */
+    .pg-table tbody tr:nth-child(even) td { background: #ffffff; }
+    .pg-table .section-row td {
+      background: #000000;       /* solid black */
+      color: #ffffff;            /* white text */
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── Quick-action button hover ── */
+    .qa-btn { transition: background .2s; }
+    .qa-btn:hover { background: rgba(255,255,255,.25); }
+
+    /* ── Booster row hover ── */
+    .brow { transition: background .15s; }
+    .brow:hover { background: #f3f4f6; }
+
+    /* ── Shop / photo card hover ── */
+    .shop-card { transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .shop-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.5); border-color: var(--wylie-gold); }
+
+    .photo-card { transition: transform .2s, box-shadow .2s; }
+    .photo-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.18); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f3f4f6; }
+    ::-webkit-scrollbar-thumb { background: var(--wylie-purple); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  ANNOUNCEMENT BANNER                                         ║
+  ║  Surface: gold (#FFD700)  |  Text: BLACK (max contrast)      ║
+  ║  EDIT in JS: set CONFIG.announcement string. "" hides it.    ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<div id="announcement-banner"
+     class="relative py-4 px-6 items-center justify-center gap-3"
+     style="background:#FFD700;">
+  <span class="text-2xl" aria-hidden="true">📢</span>
+  <span id="announcement-text" class="ff-body font-bold text-base text-black"></span>
+  <button onclick="this.parentElement.style.display='none'"
+          aria-label="Dismiss"
+          class="absolute right-5 top-1/2 -translate-y-1/2
+                 font-bold text-2xl text-black hover:text-gray-800 leading-none">✕</button>
+</div>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  NAVIGATION                                                  ║
+  ║  Surface: BLACK  |  Text: WHITE only (no grays)              ║
+  ║  EDIT: To add/remove links, edit BOTH the desktop links      ║
+  ║  AND the mobile menu div below it.                           ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<nav class="sticky top-0 z-50 shadow-xl" style="background:#000000;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Wordmark logo -->
+      <a href="#home" class="flex flex-col leading-tight">
+        <span class="ff-display text-xl font-bold tracking-wider hover:opacity-80 transition-opacity"
+              style="color:#FFD700;">PURE GOLD</span>
+        <span class="ff-body text-white tracking-widest uppercase font-medium" style="font-size:11px;">
+          Wylie High School Band
+        </span>
+      </a>
+
+      <!-- Desktop nav links — WHITE text on black -->
+      <div class="hidden lg:flex items-center gap-0.5">
+        <a href="#info"     class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">Info</a>
+        <a href="#members"  class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">Members</a>
+        <a href="#bcmf"     class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">BCMF</a>
+        <a href="#calendar" class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">Calendar</a>
+        <a href="#about"    class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">About</a>
+        <a href="#boosters" class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">Boosters</a>
+        <a href="#photos"   class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">Photos</a>
+        <a href="#shop"     class="nav-a ff-body text-white hover:text-gold px-3 py-2 text-sm font-semibold rounded transition-colors">Shop</a>
+        <!-- Register CTA: solid purple pill, WHITE text -->
+        <a href="#join"
+           class="ml-2 ff-body text-white text-sm font-bold px-5 py-2 rounded transition-opacity hover:opacity-90"
+           style="background:#702082;">
+          Join / Register
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="mob-btn" aria-label="Menu" class="lg:hidden text-white hover:text-gold p-2 rounded">
+        <svg id="mob-icon-open"  class="w-6 h-6"        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="mob-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu — text-base for touch readability -->
+    <div id="mob-menu" class="hidden lg:hidden border-t-2 border-white/30 py-3 space-y-0.5">
+      <a href="#info"     class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">Info</a>
+      <a href="#members"  class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">Members</a>
+      <a href="#bcmf"     class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">BCMF</a>
+      <a href="#calendar" class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">Calendar</a>
+      <a href="#about"    class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">About</a>
+      <a href="#boosters" class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">Boosters</a>
+      <a href="#photos"   class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">Photos</a>
+      <a href="#shop"     class="mob-a block ff-body text-white hover:bg-white/10 py-3 px-3 text-base font-semibold rounded">Shop</a>
+      <a href="#join"     class="mob-a block mt-2 ff-body text-white font-bold text-base px-4 py-3 rounded text-center"
+                          style="background:#702082;">Join / Register</a>
+    </div>
+  </div>
+</nav>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  HERO                                                        ║
+  ║  Surface: dark gradient (black → dark purple → brand purple) ║
+  ║  Text: ALL WHITE — gradient is dark throughout               ║
+  ║  EDIT: Show theme name in the H1 below.                      ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="home" class="hero-grad relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-24 lg:py-40 relative z-10">
+    <div class="max-w-2xl">
+
+      <!-- Season label: GOLD on dark purple = ~10:1 -->
+      <p class="ff-body text-base tracking-widest uppercase mb-5 font-bold" style="color:#FFD700;">
+        Wylie High School · Abilene, TX · 2026–27
+      </p>
+
+      <!-- Headline -->
+      <h1 class="ff-display font-bold leading-none tracking-wide text-white">
+        <span class="block text-7xl lg:text-9xl">PURE</span>
+        <span class="block text-7xl lg:text-9xl" style="color:#FFD700;">GOLD</span>
+        <span class="block text-2xl lg:text-3xl text-white mt-3 tracking-widest font-semibold">
+          MARCHING BAND
+        </span>
+      </h1>
+
+      <div class="gold-bar w-44 my-8"></div>
+
+      <!-- Show season subtitle: WHITE text -->
+      <p class="ff-body text-white text-base uppercase tracking-widest mb-2 font-bold">
+        2026 Competitive Show
+      </p>
+      <p class="ff-display text-3xl lg:text-4xl font-bold text-white italic tracking-wide mb-12">
+        "Into the Unknown"
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-4">
+        <!-- Primary CTA: gold bg + black text = max contrast -->
+        <a href="#calendar"
+           class="ff-body font-bold text-base px-7 py-4 rounded transition-opacity hover:opacity-90"
+           style="background:#FFD700; color:#000;">
+          📅 View Schedule
+        </a>
+        <!-- Secondary CTA: white outline + white text on dark -->
+        <a href="#join"
+           class="border-2 border-white text-white font-bold text-base px-7 py-4 rounded transition-colors hover:bg-white hover:text-black ff-body">
+          📋 Forms &amp; Registration
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Last-updated badge: WHITE text on solid black pill -->
+  <div class="absolute bottom-4 right-5 z-10 ff-body text-white text-sm font-semibold px-4 py-2 rounded-full"
+       style="background:rgba(0,0,0,0.7);">
+    Updated: <span id="hero-updated"></span>
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  QUICK ACTIONS BAR                                           ║
+  ║  Surface: dark purple (#4d155a) with gold bottom border      ║
+  ║  Text: WHITE only                                            ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<div class="border-b-4" style="background:#4d155a; border-color:#FFD700;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <a href="#calendar"
+         class="qa-btn flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm ff-body font-bold text-white"
+         style="background:rgba(255,255,255,0.15);">
+        <span class="text-xl leading-none" style="color:#FFD700;" aria-hidden="true">📅</span>
+        Calendar
+      </a>
+      <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+         class="qa-btn flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm ff-body font-bold text-white"
+         style="background:rgba(255,255,255,0.15);">
+        <span class="text-xl leading-none" style="color:#FFD700;" aria-hidden="true">📋</span>
+        Submit a Form
+      </a>
+      <a href="#members"
+         class="qa-btn flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm ff-body font-bold text-white"
+         style="background:rgba(255,255,255,0.15);">
+        <span class="text-xl leading-none" style="color:#FFD700;" aria-hidden="true">📖</span>
+        Handbook
+      </a>
+      <a href="#boosters"
+         class="qa-btn flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm ff-body font-bold text-white"
+         style="background:rgba(255,255,255,0.15);">
+        <span class="text-xl leading-none" style="color:#FFD700;" aria-hidden="true">🤝</span>
+        Boosters
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  INFO — PROGRAM AT A GLANCE                                  ║
+  ║  Surface: WHITE                                              ║
+  ║  Text rule: BLACK headings, BLACK body — no gray text        ║
+  ║  Card 1 (Ensembles): BLACK bg, WHITE text                    ║
+  ║  Card 2 (Key Dates): PURPLE bg, WHITE text                   ║
+  ║  Card 3 (Need Help): WHITE bg w/ BLACK border, BLACK text    ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="info" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow mb-3">2026–27 Season</p>
+      <h2 class="ff-display text-5xl font-bold text-black">PROGRAM AT A GLANCE</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!--
+        CARD 1 — Ensembles
+        BLACK background, WHITE text only
+        EDIT: Update the <ul> list below to add/remove ensembles.
+      -->
+      <div class="rounded-2xl p-7" style="background:#000000;">
+        <h3 class="ff-display text-2xl font-bold mb-5" style="color:#FFD700;">ENSEMBLES</h3>
+        <ul class="space-y-3 ff-body">
+          <li class="flex items-start gap-3 text-white text-base font-semibold">
+            <span class="font-bold mt-1 leading-none" style="color:#FFD700;" aria-hidden="true">▸</span>
+            Honor Band <span class="ml-1 font-medium">— 5A Varsity</span>
+          </li>
+          <li class="flex items-start gap-3 text-white text-base font-semibold">
+            <span class="font-bold mt-1 leading-none" style="color:#FFD700;" aria-hidden="true">▸</span>
+            Symphonic Band <span class="ml-1 font-medium">— 5A Non-Varsity</span>
+          </li>
+          <li class="flex items-start gap-3 text-white text-base font-semibold">
+            <span class="font-bold mt-1 leading-none" style="color:#FFD700;" aria-hidden="true">▸</span>
+            Concert Band <span class="ml-1 font-medium">— 5A Sub Non-Varsity</span>
+          </li>
+          <li class="flex items-start gap-3 text-white text-base font-semibold">
+            <span class="font-bold mt-1 leading-none" style="color:#FFD700;" aria-hidden="true">▸</span>
+            Jazz Band <span class="ml-1 font-medium">— 3rd Period</span>
+          </li>
+          <li class="flex items-start gap-3 text-white text-base font-semibold">
+            <span class="font-bold mt-1 leading-none" style="color:#FFD700;" aria-hidden="true">▸</span>
+            Steel Band <span class="ml-1 font-medium">— 3rd Period</span>
+          </li>
+          <li class="flex items-start gap-3 text-white text-base font-semibold">
+            <span class="font-bold mt-1 leading-none" style="color:#FFD700;" aria-hidden="true">▸</span>
+            Color Guard
+          </li>
+        </ul>
+      </div>
+
+      <!--
+        CARD 2 — Key Dates
+        PURPLE background (#702082), WHITE text only
+        EDIT: Update deadline and description text below.
+      -->
+      <div class="rounded-2xl p-7" style="background:#702082;">
+        <h3 class="ff-display text-2xl font-bold mb-5" style="color:#FFD700;">KEY DATES</h3>
+        <div class="space-y-5 ff-body">
+          <div class="border-b-2 pb-4" style="border-color:rgba(255,255,255,0.4);">
+            <p class="font-bold text-sm uppercase tracking-wider mb-1" style="color:#FFD700;">
+              Procedure Agreement Due
+            </p>
+            <p class="text-white text-2xl font-bold">July 24, 2026</p>
+            <p class="text-white text-sm mt-1 font-medium">
+              Required before travel or performance
+            </p>
+          </div>
+          <div>
+            <p class="font-bold text-sm uppercase tracking-wider mb-1" style="color:#FFD700;">
+              Full Schedule
+            </p>
+            <p class="text-white text-base font-medium leading-relaxed">
+              Live on Google Calendar — sync to your device or view the embed below.
+            </p>
+          </div>
+          <a href="#calendar"
+             class="inline-block ff-body font-bold text-sm px-5 py-3 rounded transition-opacity hover:opacity-90"
+             style="background:#FFD700; color:#000;">
+            View Calendar →
+          </a>
+        </div>
+      </div>
+
+      <!--
+        CARD 3 — Need Help
+        WHITE bg with BLACK 2px border and shadow for clear visibility
+        Inner action cards: gray-100 bg with strong borders
+      -->
+      <div class="bg-white rounded-2xl p-7 shadow-md" style="border:2px solid #000;">
+        <h3 class="ff-display text-2xl font-bold mb-5 text-black">NEED HELP?</h3>
+        <div class="space-y-3 ff-body">
+          <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+             class="lift flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4 transition-colors hover:bg-gray-200"
+             style="border:2px solid #000;">
+            <span class="text-2xl" aria-hidden="true">📋</span>
+            <div>
+              <p class="font-bold text-black text-base">Forms &amp; Registration</p>
+              <p class="text-black text-sm font-medium mt-0.5">Submit via JotForm</p>
+            </div>
+          </a>
+          <a href="mailto:whspuregold@gmail.com"
+             class="lift flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4 transition-colors hover:bg-gray-200"
+             style="border:2px solid #000;">
+            <span class="text-2xl" aria-hidden="true">✉️</span>
+            <div>
+              <p class="font-bold text-black text-base">Email Band Office</p>
+              <p class="text-black text-sm font-medium mt-0.5">whspuregold@gmail.com</p>
+            </div>
+          </a>
+          <a href="https://www.puregoldband.org" target="_blank" rel="noopener"
+             class="lift flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4 transition-colors hover:bg-gray-200"
+             style="border:2px solid #000;">
+            <span class="text-2xl" aria-hidden="true">🌐</span>
+            <div>
+              <p class="font-bold text-black text-base">puregoldband.org</p>
+              <p class="text-black text-sm font-medium mt-0.5">Main program website</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  MEMBER HANDBOOK                                             ║
+  ║  Surface: gray-100 (light gray)                              ║
+  ║  Accordion cards: WHITE bg with BLACK 2px border             ║
+  ║  Accordion expanded panel: WHITE bg with BLACK top border    ║
+  ║  Text inside: BLACK only                                     ║
+  ║  EDIT: Content lives in HANDBOOK array in JS below.          ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="members" class="py-20" style="background:#f3f4f6;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow mb-3">Student &amp; Parent Resources</p>
+      <h2 class="ff-display text-5xl font-bold text-black">MEMBER HANDBOOK</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+      <p class="ff-body text-black text-base font-medium mt-5">
+        Key policies from the 2026-27 Pure Gold Band Handbook. Tap any section to expand.
+      </p>
+    </div>
+
+    <!-- Accordion items rendered by renderHandbook() in JS -->
+    <div id="handbook-accordion" class="space-y-3"></div>
+
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  BCMF — Big Country Music Festival                           ║
+  ║  Surface: PURPLE (#702082)                                   ║
+  ║  Inner panels: DARK PURPLE (#4d155a) for clear separation    ║
+  ║  Quick links card: BLACK bg for max contrast                 ║
+  ║  All text: WHITE only                                        ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="bcmf" class="py-20 relative overflow-hidden" style="background:#702082;">
+  <!-- Decorative diagonal stripe — purely visual -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"
+       style="background:repeating-linear-gradient(45deg,transparent 0,transparent 60px,rgba(255,215,0,0.06) 60px,rgba(255,215,0,0.06) 62px);">
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    <div class="mb-12">
+      <p class="eyebrow-d mb-3">Marquee Competition</p>
+      <h2 class="ff-display text-5xl font-bold text-white leading-none">
+        BIG COUNTRY<br>MUSIC FESTIVAL
+      </h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+      <!-- Left: description + 3 sub-panels -->
+      <div class="lg:col-span-3 space-y-5">
+        <p class="ff-body text-white text-lg font-medium leading-relaxed">
+          The Big Country Music Festival (BCMF) is one of the premier marching competitions in
+          West Texas, hosted right here in Abilene. Pure Gold competes alongside programs from
+          across the Big Country region.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!--
+            Each panel: DARK PURPLE bg (#4d155a) on PURPLE section bg (#702082)
+            = clearly distinct, no color blending
+          -->
+          <div class="rounded-xl p-5" style="background:#4d155a;">
+            <h4 class="ff-display font-bold text-xl mb-2" style="color:#FFD700;">Competition</h4>
+            <p class="ff-body text-white text-sm font-medium leading-relaxed">
+              Multiple classification levels. Scores and placements posted same day.
+            </p>
+          </div>
+          <div class="rounded-xl p-5" style="background:#4d155a;">
+            <h4 class="ff-display font-bold text-xl mb-2" style="color:#FFD700;">Volunteers</h4>
+            <p class="ff-body text-white text-sm font-medium leading-relaxed">
+              Booster Association coordinates all volunteer slots. Sign up via JotForm.
+            </p>
+          </div>
+          <div class="rounded-xl p-5" style="background:#4d155a;">
+            <h4 class="ff-display font-bold text-xl mb-2" style="color:#FFD700;">Meal Deals</h4>
+            <p class="ff-body text-white text-sm font-medium leading-relaxed">
+              Visiting band meal packages through the Pure Gold Booster Association.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        Right: Quick links card
+        BLACK background — strongest possible contrast against the purple section
+      -->
+      <div class="lg:col-span-2 rounded-2xl p-6 self-start" style="background:#000000;">
+        <h3 class="ff-display font-bold text-xl mb-5" style="color:#FFD700;">QUICK LINKS</h3>
+        <div class="space-y-3">
+          <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+             class="flex items-center justify-between ff-body font-bold text-base px-5 py-4 rounded-lg transition-opacity hover:opacity-90"
+             style="background:#FFD700; color:#000;">
+            <span>Meal Deal Order Form</span><span>↗</span>
+          </a>
+          <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+             class="flex items-center justify-between ff-body font-bold text-base px-5 py-4 rounded-lg border-2 border-white text-white hover:bg-white hover:text-black transition-colors">
+            <span>Volunteer Sign-Up</span><span>↗</span>
+          </a>
+          <a href="#calendar"
+             class="flex items-center justify-between ff-body font-bold text-base px-5 py-4 rounded-lg border-2 border-white text-white hover:bg-white hover:text-black transition-colors">
+            <span>View BCMF on Calendar</span><span>↗</span>
+          </a>
+        </div>
+        <p class="text-white text-sm ff-body font-medium mt-5 leading-relaxed">
+          Specific date posted to the calendar once confirmed.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  CALENDAR                                                    ║
+  ║  Surface: BLACK                                              ║
+  ║  Text: WHITE only                                            ║
+  ║  Action buttons: gold (primary) / white outline (secondary)  ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="calendar" class="py-20" style="background:#000000;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-10">
+      <p class="eyebrow-d mb-3">Stay on Track</p>
+      <h2 class="ff-display text-5xl font-bold text-white">SCHEDULE &amp; CALENDAR</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mb-8">
+      <!-- Primary action: gold bg + black text = max contrast -->
+      <a href="webcal://calendar.google.com/calendar/ical/whspuregold%40gmail.com/public/basic.ics"
+         class="ff-body font-bold text-base px-5 py-3 rounded transition-opacity hover:opacity-90"
+         style="background:#FFD700; color:#000;">
+        ＋ Sync to Device
+      </a>
+      <!-- Outline buttons: 2px white border, white text -->
+      <a href="https://calendar.google.com/calendar/ical/whspuregold%40gmail.com/public/basic.ics"
+         target="_blank" rel="noopener"
+         class="border-2 border-white text-white font-bold text-base ff-body px-5 py-3 rounded hover:bg-white hover:text-black transition-colors">
+        Download .ics ↗
+      </a>
+      <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+         class="border-2 border-white text-white font-bold text-base ff-body px-5 py-3 rounded hover:bg-white hover:text-black transition-colors">
+        Absence Form ↗
+      </a>
+      <a href="https://www.puregoldband.org" target="_blank" rel="noopener"
+         class="border-2 border-white text-white font-bold text-base ff-body px-5 py-3 rounded hover:bg-white hover:text-black transition-colors">
+        puregoldband.org ↗
+      </a>
+    </div>
+
+    <!-- Calendar embed: 2px white border for visibility on black bg -->
+    <div class="rounded-2xl overflow-hidden border-2 border-white shadow-2xl">
+      <iframe id="cal-frame" loading="lazy"
+        src="https://calendar.google.com/calendar/embed?src=whspuregold%40gmail.com&ctz=America%2FChicago&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&mode=MONTH&color=%23702082"
+        title="Pure Gold Band Google Calendar">
+      </iframe>
+    </div>
+
+    <p class="text-white text-sm ff-body font-medium mt-4">
+      * Dates and times are subject to change. Always verify via the BAND App or puregoldband.org.
+    </p>
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  ABOUT THE PROGRAM                                           ║
+  ║  Surface: WHITE                                              ║
+  ║  Program summary: gray-100 bg with BLACK 2px border          ║
+  ║  Staff accordion: WHITE bg with BLACK 2px border, COLLAPSED  ║
+  ║  All text: BLACK on light surfaces                           ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="about" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow mb-3">Who We Are</p>
+      <h2 class="ff-display text-5xl font-bold text-black">ABOUT THE PROGRAM</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <!-- Program summary panel: gray-100 bg, BLACK 2px border, BLACK text -->
+    <div class="rounded-2xl p-8 mb-8" style="background:#f3f4f6; border:2px solid #000;">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ff-body text-base">
+        <div>
+          <h4 class="ff-display text-xl font-bold mb-3 uppercase tracking-wide" style="color:#4d155a;">
+            Honor Band
+          </h4>
+          <p class="text-black font-medium leading-relaxed">
+            Conducted by Mr. McDonald. 5A Varsity ensemble. Requires passing grades,
+            full attendance, All-Region participation, and Varsity performance standards.
+          </p>
+        </div>
+        <div>
+          <h4 class="ff-display text-xl font-bold mb-3 uppercase tracking-wide" style="color:#4d155a;">
+            Symphonic &amp; Concert Band
+          </h4>
+          <p class="text-black font-medium leading-relaxed">
+            Symphonic Band (Ms. Ray) competes 5A Non-Varsity. Concert Band is 5A Sub
+            Non-Varsity, focused on developing musicality. Both require passing grades
+            and full attendance.
+          </p>
+        </div>
+        <div>
+          <h4 class="ff-display text-xl font-bold mb-3 uppercase tracking-wide" style="color:#4d155a;">
+            Jazz, Steel &amp; Guard
+          </h4>
+          <p class="text-black font-medium leading-relaxed">
+            Jazz and Steel Band meet 3rd period daily. Color Guard integrates with the
+            Marching Band in the fall and operates as Winter Guard independently in the spring.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Staff accordion — collapsed by default -->
+    <div class="rounded-2xl overflow-hidden bg-white shadow-md" style="border:2px solid #000;">
+      <button id="staff-toggle-btn" onclick="toggleStaff()"
+              class="w-full flex items-center justify-between
+                     px-7 py-5 bg-white hover:bg-gray-100 text-left transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl leading-none" aria-hidden="true">🎓</span>
+          <span class="ff-display text-2xl font-bold text-black">Meet the Band Staff</span>
+        </div>
+        <svg id="staff-chevron" class="acc-chevron w-6 h-6 flex-shrink-0" style="color:#4d155a;"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div id="staff-acc" class="acc-body">
+        <div class="px-7 py-7" style="background:#f3f4f6; border-top:2px solid #000;">
+          <!-- Director cards rendered by renderDirectors() in JS -->
+          <div id="director-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  BOOSTERS                                                    ║
+  ║  Surface: gray-100                                           ║
+  ║  Get Involved cards: WHITE with BLACK 2px border             ║
+  ║  Roster accordion: WHITE with BLACK 2px border, COLLAPSED    ║
+  ║  All text: BLACK on light surfaces                           ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="boosters" class="py-20" style="background:#f3f4f6;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow mb-3">Parent Organization</p>
+      <h2 class="ff-display text-5xl font-bold text-black">BOOSTER ASSOCIATION</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+      <!-- Get Involved (primary) -->
+      <div>
+        <h3 class="ff-display text-2xl font-bold mb-5 text-black">GET INVOLVED</h3>
+        <div class="space-y-3">
+          <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+             class="lift flex items-center gap-4 bg-white rounded-xl p-5 transition-colors hover:bg-gray-50"
+             style="border:2px solid #000;">
+            <span class="text-3xl" aria-hidden="true">📝</span>
+            <div>
+              <p class="ff-body font-bold text-black text-base">Volunteer Sign-Up</p>
+              <p class="ff-body text-black font-medium text-sm mt-0.5">Submit via JotForm</p>
+            </div>
+            <span class="ml-auto text-2xl font-bold" style="color:#4d155a;" aria-hidden="true">↗</span>
+          </a>
+          <a href="mailto:puregoldpresident@gmail.com"
+             class="lift flex items-center gap-4 bg-white rounded-xl p-5 transition-colors hover:bg-gray-50"
+             style="border:2px solid #000;">
+            <span class="text-3xl" aria-hidden="true">✉️</span>
+            <div>
+              <p class="ff-body font-bold text-black text-base">Email the President</p>
+              <p class="ff-body text-black font-medium text-sm mt-0.5">puregoldpresident@gmail.com</p>
+            </div>
+            <span class="ml-auto text-2xl font-bold" style="color:#4d155a;" aria-hidden="true">↗</span>
+          </a>
+          <a href="mailto:puregoldtreasurer@gmail.com"
+             class="lift flex items-center gap-4 bg-white rounded-xl p-5 transition-colors hover:bg-gray-50"
+             style="border:2px solid #000;">
+            <span class="text-3xl" aria-hidden="true">💰</span>
+            <div>
+              <p class="ff-body font-bold text-black text-base">Email the Treasurer</p>
+              <p class="ff-body text-black font-medium text-sm mt-0.5">puregoldtreasurer@gmail.com</p>
+            </div>
+            <span class="ml-auto text-2xl font-bold" style="color:#4d155a;" aria-hidden="true">↗</span>
+          </a>
+          <!-- Info note: dark purple bg, WHITE text -->
+          <div class="rounded-xl p-5" style="background:#4d155a; border:2px solid #000;">
+            <p class="ff-body text-white text-base font-medium leading-relaxed">
+              Booster meetings are announced via the BAND App and Google Calendar.
+              All parents and guardians are encouraged to attend.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Officer roster — collapsed -->
+      <div>
+        <div class="rounded-2xl overflow-hidden bg-white shadow-md" style="border:2px solid #000;">
+          <button onclick="toggleAcc('boster-acc','boster-chev')"
+                  class="w-full flex items-center justify-between
+                         px-6 py-5 bg-white hover:bg-gray-100 text-left transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl leading-none" aria-hidden="true">🏛️</span>
+              <span class="ff-display text-xl font-bold text-black">2026-27 Officer Roster</span>
+            </div>
+            <svg id="boster-chev" class="acc-chevron w-6 h-6 flex-shrink-0" style="color:#4d155a;"
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                    d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="boster-acc" class="acc-body">
+            <div id="booster-roster" class="divide-y-2" style="border-top:2px solid #000; --tw-divide-opacity:1;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  PHOTOS                                                      ║
+  ║  Surface: WHITE                                              ║
+  ║  Cards: WHITE with BLACK 2px border + shadow                 ║
+  ║  Card thumbnail: BLACK gradient (icon clearly visible)       ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="photos" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow mb-3">Memories</p>
+      <h2 class="ff-display text-5xl font-bold text-black">PHOTO GALLERY</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <div id="photo-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  SHOP                                                        ║
+  ║  Surface: BLACK                                              ║
+  ║  Cards: gray-800 bg with WHITE 2px border, gold hover        ║
+  ║  All text: WHITE                                             ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="shop" class="py-20" style="background:#000000;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12">
+      <p class="eyebrow-d mb-3">Pure Gold Gear</p>
+      <h2 class="ff-display text-5xl font-bold text-white">SHOP</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+    </div>
+
+    <div id="shop-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  JOIN / REGISTER                                             ║
+  ║  Surface: WHITE                                              ║
+  ║  Deadline callout: gold-tinted bg with BLACK border + text   ║
+  ║  JotForm iframe: BLACK 2px border for visibility             ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section id="join" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-10">
+      <p class="eyebrow mb-3">Registration &amp; Forms</p>
+      <h2 class="ff-display text-5xl font-bold text-black">JOIN / REGISTER</h2>
+      <div class="gold-bar w-24 mt-4"></div>
+
+      <!--
+        Deadline callout: black bg + gold accent + WHITE text = maximum contrast
+      -->
+      <div class="mt-6 flex items-start gap-3 rounded-xl px-5 py-5 max-w-2xl"
+           style="background:#000000; border-left:8px solid #FFD700;">
+        <span class="text-2xl leading-none mt-0.5" aria-hidden="true">⚠️</span>
+        <p class="ff-body text-white text-base leading-relaxed font-bold">
+          Procedure Agreement due <span style="color:#FFD700;">July 24, 2026</span>.
+          Students will not travel or perform until this form has been returned.
+        </p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl overflow-hidden shadow-md" style="border:2px solid #000;">
+      <iframe id="jotform-frame" loading="lazy"
+        src="https://www.jotform.com/app/213223550674148"
+        title="Pure Gold Band Forms">
+      </iframe>
+    </div>
+    <p class="text-black text-sm ff-body font-medium mt-4">
+      If the form above doesn't load,
+      <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+         class="underline font-bold hover:opacity-80" style="color:#4d155a;">
+        open directly on JotForm ↗
+      </a>
+    </p>
+  </div>
+</section>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  FOOTER                                                      ║
+  ║  Surface: BLACK                                              ║
+  ║  ALL TEXT: WHITE — no grays anywhere                         ║
+  ║  Headings: GOLD                                              ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<footer class="pt-14 pb-8" style="background:#000000;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+
+      <!-- About column -->
+      <div class="md:col-span-2">
+        <h4 class="ff-display text-3xl font-bold mb-3" style="color:#FFD700;">PURE GOLD BAND</h4>
+        <p class="ff-body text-white text-base font-medium leading-relaxed">
+          Wylie High School · Abilene, TX<br>
+          2026–27 Season<br>
+          Show: <span class="italic font-bold">"Into the Unknown"</span>
+        </p>
+        <a href="https://www.puregoldband.org" target="_blank" rel="noopener"
+           class="inline-block mt-4 text-base ff-body font-bold transition-opacity hover:opacity-80"
+           style="color:#FFD700;">
+          www.puregoldband.org ↗
+        </a>
+      </div>
+
+      <!-- Navigate column: WHITE links, GOLD on hover -->
+      <div>
+        <h5 class="ff-body text-white text-sm font-bold uppercase tracking-wider mb-4">Navigate</h5>
+        <div class="space-y-3 ff-body text-base font-semibold">
+          <a href="#info"     class="block text-white hover:text-gold transition-colors">Program Info</a>
+          <a href="#members"  class="block text-white hover:text-gold transition-colors">Member Handbook</a>
+          <a href="#calendar" class="block text-white hover:text-gold transition-colors">Calendar</a>
+          <a href="#bcmf"     class="block text-white hover:text-gold transition-colors">BCMF</a>
+          <a href="#about"    class="block text-white hover:text-gold transition-colors">About</a>
+          <a href="#boosters" class="block text-white hover:text-gold transition-colors">Boosters</a>
+          <a href="#photos"   class="block text-white hover:text-gold transition-colors">Photos</a>
+          <a href="#shop"     class="block text-white hover:text-gold transition-colors">Shop</a>
+          <a href="#join"     class="block text-white hover:text-gold transition-colors">Join / Register</a>
+        </div>
+      </div>
+
+      <!-- Contact column -->
+      <div>
+        <h5 class="ff-body text-white text-sm font-bold uppercase tracking-wider mb-4">Contact</h5>
+        <div class="space-y-3 ff-body text-base font-semibold">
+          <a href="mailto:whspuregold@gmail.com"       class="block text-white hover:text-gold transition-colors">whspuregold@gmail.com</a>
+          <a href="mailto:puregoldpresident@gmail.com" class="block text-white hover:text-gold transition-colors">Boosters President</a>
+          <a href="mailto:puregoldtreasurer@gmail.com" class="block text-white hover:text-gold transition-colors">Boosters Treasurer</a>
+          <a href="https://www.jotform.com/app/213223550674148" target="_blank" rel="noopener"
+             class="block text-white hover:text-gold transition-colors">Submit a Form ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar: WHITE text on BLACK -->
+    <div class="border-t-2 border-white pt-6
+                flex flex-col sm:flex-row justify-between items-center gap-3
+                ff-body text-sm text-white font-medium">
+      <p>© 2026 Wylie ISD Pure Gold Band · Abilene, TX</p>
+      <p>Last Updated: <span id="footer-updated" class="font-bold" style="color:#FFD700;"></span></p>
+    </div>
+  </div>
+</footer>
+
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  JAVASCRIPT                                                  ║
+  ║                                                              ║
+  ║  EDIT FREELY: CONFIG block, DIRECTORS, BOOSTERS, HANDBOOK    ║
+  ║  DO NOT EDIT: render functions below those data blocks       ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<script>
+
+/* ══════════════════════════════════════════════════════════════
+   CONFIG — Director edits this block only.
+
+   announcement   "" hides the gold banner. Add text to show it.
+   photoSources   array of photo album links. Empty url = "Coming Soon"
+   shopItems      array of shop/store cards.
+   ══════════════════════════════════════════════════════════════ */
+const CONFIG = {
+
+  announcement: "",
+  /* Example to activate:
+     announcement: "🏆 Area Contest Saturday! Call time 1:30 PM. Travel uniform.",
+  */
+
+  photoSources: [
+    {
+      label:       "Google Photos",
+      description: "Official Pure Gold Band 2026-27 season album",
+      url:         "",         /* ← Paste shared Google Photos album URL here */
+      icon:        "📸",
+      cta:         "View Album"
+    }
+    /* Add more sources by copying the block above. Examples:
+    , { label: "SmugMug",   description: "Contest photos",   url: "https://...", icon: "🏆", cta: "View Photos"    }
+    , { label: "Facebook",  description: "Band page photos", url: "https://www.facebook.com/Wyliepuregoldband/",
+        icon: "👥", cta: "View on Facebook" }
+    */
+  ],
+
+  shopItems: [
+    {
+      label:       "Pure Gold Fanwear",
+      description: "Official Pure Gold Band apparel, accessories, and spirit wear. Sizes for the whole family.",
+      url:         "https://www.puregoldband.org",   /* ← Replace with direct fanwear store URL */
+      icon:        "👕",
+      badge:       "New Items",
+      external:    true
+    },
+    {
+      label:       "Props For Sale",
+      description: "Retired marching show props available for purchase. Contact the Boosters for current inventory and pricing.",
+      url:         "mailto:puregoldpresident@gmail.com",
+      icon:        "🎪",
+      badge:       "Contact for Inventory",
+      external:    false
+    }
+  ]
+};
+
+
+/* ══════════════════════════════════════════════════════════════
+   DIRECTORS — Edit names, titles, and bios here.
+   initials: 2-letter abbreviation for the avatar circle.
+   ══════════════════════════════════════════════════════════════ */
+const DIRECTORS = [
+  {
+    name:     "Kyle McDonald",
+    title:    "Director of Bands",
+    initials: "KM",
+    bio:      "University of Northern Colorado, 2009. 4th year at Wylie. Led programs at Childress, Panhandle, and Caprock — including State Marching and State Honor Band appearances."
+  },
+  {
+    name:     "Ashlyn Ray",
+    title:    "Asst. Director / Jazz Band",
+    initials: "AR",
+    bio:      "Stephen F. Austin State University, 2017. Consistent UIL Sweepstakes ratings with the Symphonic Band. Head Girls Counselor, SFA Band Camps. Macy's Great American Marching Band alum."
+  },
+  {
+    name:     "Joshua Howeth",
+    title:    "Director of Percussion",
+    initials: "JH",
+    bio:      "McMurry University, 2016. Rejoined Wylie in 2025. Helped 14 students earn All-State placements during tenure at Jim Ned CISD."
+  },
+  {
+    name:     "Angelina Torres",
+    title:    "Head Color Guard Instructor",
+    initials: "AT",
+    bio:      "Caprock HS, 2018. Phantom Regiment 2016. WT A&M Guard Captain. Former Asst. Guard Director at Wylie, now Head Color Guard Director."
+  }
+];
+
+
+/* ══════════════════════════════════════════════════════════════
+   BOOSTERS — Edit roles, names, and emails here.
+   email: "" leaves the email column blank.
+   ══════════════════════════════════════════════════════════════ */
+const BOOSTERS = [
+  { role: "President",                     name: "Heather Bailey",     email: "puregoldpresident@gmail.com" },
+  { role: "Vice-President",                name: "Kathryn Clark",      email: "" },
+  { role: "Treasurer",                     name: "Jerry Clark",        email: "puregoldtreasurer@gmail.com" },
+  { role: "Co-Treasurer",                  name: "Steven Ammons",      email: "" },
+  { role: "Secretary",                     name: "Jana Ammons",        email: "" },
+  { role: "Parliamentarian",               name: "Leanne Tucker",      email: "" },
+  { role: "JH Representative",             name: "Ashley Rhea",        email: "" },
+  { role: "At-Large / Hospitality",        name: "Angel DeBardeleben", email: "" },
+  { role: "At-Large / Booster Membership", name: "Jaymie Herberg",     email: "" },
+  { role: "At-Large / Merch Chair",        name: "Mandy Wisham",       email: "" },
+  { role: "At-Large",                      name: "Kristie Ammons",     email: "" },
+  { role: "At-Large",                      name: "Autumn Anderson",    email: "" },
+  { role: "At-Large",                      name: "Blaise Herberg",     email: "" }
+];
+
+
+/* ══════════════════════════════════════════════════════════════
+   HANDBOOK — Accordion sections.
+   Each section: title, icon, body (HTML).
+   ── CONTRAST INSIDE PANELS ─────────────────────────────────
+   Body bg: white  |  Body text: BLACK font-medium
+   Sub-panels: solid colored backgrounds with matching dark text
+   ══════════════════════════════════════════════════════════════ */
+const HANDBOOK = [
+  {
+    title: "Attendance Policy",
+    icon:  "📆",
+    body: `
+      <div class="space-y-5 ff-body text-base text-black font-medium">
+        <p class="text-black font-bold text-lg">
+          Marching band is like an athletic team — every position is critical.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="rounded-xl p-5" style="background:#dcfce7; border:2px solid #14532d;">
+            <p class="font-bold mb-3 uppercase tracking-wide text-base" style="color:#14532d;">
+              ✅ Excused — No grade deduction
+            </p>
+            <ul class="space-y-2" style="color:#14532d;">
+              <li>• Conflicting school UIL activity</li>
+              <li>• School-excused absence</li>
+              <li>• Death in the family</li>
+              <li>• Immediate family wedding</li>
+            </ul>
+          </div>
+          <div class="rounded-xl p-5" style="background:#fee2e2; border:2px solid #7f1d1d;">
+            <p class="font-bold mb-3 uppercase tracking-wide text-base" style="color:#7f1d1d;">
+              ❌ Unexcused — Grade deduction
+            </p>
+            <ul class="space-y-2" style="color:#7f1d1d;">
+              <li>• Work or babysitting</li>
+              <li>• Homework / studying</li>
+              <li>• Transportation problems</li>
+              <li>• Doctor's appointments</li>
+              <li>• Driver's Ed or other scheduling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rounded-r-xl p-5" style="background:#fef3c7; border-left:8px solid #b45309;">
+          <p class="font-bold mb-1 text-lg" style="color:#78350f;">24-Hour Rule</p>
+          <p style="color:#78350f;">
+            All absence notifications must reach a director at least 24 hours before the event.
+            Use BAND App, email, or the Absence Form at puregoldband.org.
+            Communicate with Mr. McDonald first.
+          </p>
+        </div>
+        <p class="text-black"><strong>Tardy Policy:</strong> Each unexcused tardy = −10 points from daily grade. Multiple tardies may result in loss of marching spot.</p>
+        <p class="font-bold" style="color:#7f1d1d;">
+          Any absence from a performance is grounds for removal from the program.
+        </p>
+      </div>`
+  },
+  {
+    title: "Grading Policy",
+    icon:  "📊",
+    body: `
+      <div class="space-y-5 ff-body text-base text-black font-medium">
+        <div class="grid grid-cols-2 gap-5">
+          <div class="rounded-xl p-6 text-center" style="background:#702082; border:2px solid #000;">
+            <p class="ff-display text-6xl font-bold" style="color:#FFD700;">40%</p>
+            <p class="font-bold text-lg mt-2 text-white">Performances &amp; Tests</p>
+            <p class="text-white text-sm mt-2 font-medium leading-relaxed">
+              Playing tests, written tests, attendance at all performances
+            </p>
+          </div>
+          <div class="rounded-xl p-6 text-center" style="background:#FFD700; border:2px solid #000;">
+            <p class="ff-display text-6xl font-bold text-black">60%</p>
+            <p class="font-bold text-lg mt-2 text-black">Daily Grades</p>
+            <p class="text-black text-sm mt-2 font-medium leading-relaxed">
+              Attendance, punctuality, materials, work ethic, weekly participation
+            </p>
+          </div>
+        </div>
+        <p>Students start each six-week period with a grade of <strong>100</strong>.</p>
+        <ul class="space-y-2 text-black">
+          <li>• Missing equipment: <strong>−10 points</strong> from daily grade</li>
+          <li>• Unexcused tardy: <strong>−10 points</strong> from daily grade</li>
+          <li>• Unexcused absence: <strong>0</strong> for the event missed</li>
+          <li>• Leaving early without permission: <strong>half credit</strong></li>
+        </ul>
+        <p class="font-bold" style="color:#7f1d1d;">
+          Students failing band for the six weeks will have a parent-teacher conference.
+        </p>
+      </div>`
+  },
+  {
+    title: "Uniform Policy &amp; Replacement Costs",
+    icon:  "🎽",
+    body: `
+      <div class="space-y-5 ff-body text-base text-black font-medium">
+        <p>
+          Uniform numbers are recorded in the school system. Lost or damaged pieces are the
+          financial responsibility of the student and parent. Uniforms are property of WHS Band
+          and must be returned after each performance.
+        </p>
+        <div class="overflow-x-auto rounded-xl" style="border:2px solid #000;">
+          <table class="pg-table">
+            <thead><tr><th>Item</th><th style="text-align:right">Replacement Cost</th></tr></thead>
+            <tbody>
+              <tr><td>Marching Jacket</td>     <td style="text-align:right">$317.00</td></tr>
+              <tr><td>Bibbers (pants)</td>     <td style="text-align:right">$122.00</td></tr>
+              <tr><td>Shako (hat)</td>         <td style="text-align:right">$76.00</td></tr>
+              <tr><td>Plume</td>               <td style="text-align:right">$52.00</td></tr>
+              <tr><td>Gauntlets</td>           <td style="text-align:right">$50.00</td></tr>
+              <tr><td>Black Marching Shoes</td><td style="text-align:right">$45.00</td></tr>
+              <tr><td>Shako Box</td>           <td style="text-align:right">$25.00</td></tr>
+              <tr><td>Shako Wrap</td>          <td style="text-align:right">$25.00</td></tr>
+              <tr><td>Garment Bag</td>         <td style="text-align:right">$22.00</td></tr>
+              <tr><td>Uniform Collar</td>      <td style="text-align:right">$10.00</td></tr>
+              <tr><td>Gloves</td>              <td style="text-align:right">$4.00 / pair</td></tr>
+              <tr><td>Black Socks</td>         <td style="text-align:right">$3.00 / pair</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rounded-xl p-5 space-y-2" style="background:#f3f4f6; border:2px solid #000;">
+          <p class="text-black"><strong>Key Rules:</strong> Full uniform at ALL times · All buttons and zippers closed · Bibber crease with no break · Initials marked inside shoes · Shoes cleaned before every performance</p>
+          <p class="text-black">No earrings, necklaces, bracelets, or face paint in uniform. Stud covers required for all piercings. Tongue studs are never permitted.</p>
+          <p class="text-black font-bold">ONLY water is allowed in the band section. No concessions in uniform.</p>
+        </div>
+        <p class="text-black">Percussion and Color Guard: refer to your director for specific uniform requirements.</p>
+      </div>`
+  },
+  {
+    title: "Letter Jacket Point Sheet",
+    icon:  "🏅",
+    body: `
+      <div class="space-y-5 ff-body text-base text-black font-medium">
+        <p>
+          A student must earn <strong>50 points in one school year</strong> to qualify for a
+          letter jacket. Subsequent recognition comes as bars or letters. Awards distributed
+          in the Spring semester. Must be currently enrolled in band to receive any award.
+        </p>
+        <div class="overflow-x-auto rounded-xl" style="border:2px solid #000;">
+          <table class="pg-table">
+            <thead><tr><th>Activity</th><th style="text-align:center;width:90px">Points</th></tr></thead>
+            <tbody>
+              <tr class="section-row"><td colspan="2">Band / Guard Participation (Cumulative)</td></tr>
+              <tr><td style="padding-left:1.75rem">9th Grade Year</td>  <td style="text-align:center;font-weight:700">10</td></tr>
+              <tr><td style="padding-left:1.75rem">10th Grade Year</td> <td style="text-align:center;font-weight:700">15</td></tr>
+              <tr><td style="padding-left:1.75rem">11th Grade Year</td> <td style="text-align:center;font-weight:700">25</td></tr>
+              <tr class="section-row"><td colspan="2">TMEA Honors</td></tr>
+              <tr><td style="padding-left:1.75rem">Audition for All Region Band</td>             <td style="text-align:center;font-weight:700">5</td></tr>
+              <tr><td style="padding-left:1.75rem">Perform at Solo &amp; Ensemble Contest</td>   <td style="text-align:center;font-weight:700">5</td></tr>
+              <tr><td style="padding-left:1.75rem">Perform with All Region Band</td>             <td style="text-align:center;font-weight:700">10</td></tr>
+              <tr><td style="padding-left:1.75rem">Top TMEA Region Band / Region Orchestra</td>  <td style="text-align:center;font-weight:700">20</td></tr>
+              <tr><td style="padding-left:1.75rem">TMEA Area Jazz</td>                           <td style="text-align:center;font-weight:700">20</td></tr>
+              <tr><td style="padding-left:1.75rem">Advance to State Solo &amp; Ensemble</td>     <td style="text-align:center;font-weight:700">20</td></tr>
+              <tr><td style="padding-left:1.75rem">Advance to &amp; Audition at Area Band</td>   <td style="text-align:center;font-weight:700">25</td></tr>
+              <tr><td style="padding-left:1.75rem">All State</td>                                <td style="text-align:center;font-weight:700">50</td></tr>
+              <tr class="section-row"><td colspan="2">Other Activities</td></tr>
+              <tr><td style="padding-left:1.75rem">Student Leadership Team</td>    <td style="text-align:center;font-weight:700">5</td></tr>
+              <tr><td style="padding-left:1.75rem">Jazz Band Class</td>            <td style="text-align:center;font-weight:700">5</td></tr>
+              <tr><td style="padding-left:1.75rem">Steel Band Class</td>           <td style="text-align:center;font-weight:700">5</td></tr>
+              <tr><td style="padding-left:1.75rem">Attend University Band Camp</td><td style="text-align:center;font-weight:700">5</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-black">Color Guard members must complete the full semester of fitting to receive their award.</p>
+      </div>`
+  },
+  {
+    title: "Code of Conduct, Digital Citizenship &amp; Travel",
+    icon:  "📜",
+    body: `
+      <div class="space-y-5 ff-body text-base text-black font-medium">
+        <p>
+          All students must demonstrate courtesy, exercise self-discipline, attend all classes on
+          time, and adhere to the WHS Student Code of Conduct at all band-related events.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="rounded-xl p-5" style="background:#f3f4f6; border:2px solid #000;">
+            <p class="font-bold mb-3 text-lg text-black">Digital Citizenship</p>
+            <p class="text-black leading-relaxed">
+              Social media posts reflecting poorly on Pure Gold Band are subject to discipline.
+              The internet is public domain — even "private" posts count.
+            </p>
+          </div>
+          <div class="rounded-xl p-5" style="background:#f3f4f6; border:2px solid #000;">
+            <p class="font-bold mb-3 text-lg text-black">Bus Rules</p>
+            <ul class="space-y-2 text-black">
+              <li>• Remain seated, facing forward</li>
+              <li>• Speaking voice only</li>
+              <li>• Water only — no food or gum</li>
+              <li>• Sponsors have total authority</li>
+            </ul>
+          </div>
+          <div class="rounded-xl p-5" style="background:#f3f4f6; border:2px solid #000;">
+            <p class="font-bold mb-3 text-lg text-black">Hotel Rules</p>
+            <ul class="space-y-2 text-black">
+              <li>• No alcohol, drugs, or tobacco</li>
+              <li>• No opposite-sex room visits</li>
+              <li>• Rooms locked at all times</li>
+              <li>• Curfew strictly enforced</li>
+              <li>• No leaving hotel without group</li>
+            </ul>
+          </div>
+        </div>
+        <p class="font-bold text-lg" style="color:#7f1d1d;">
+          Zero tolerance: No drugs or alcohol at any band event or on school grounds.
+          Immediate removal from the program may result.
+        </p>
+      </div>`
+  },
+  {
+    title: "Color Guard — Marching &amp; Independent Seasons",
+    icon:  "🎌",
+    body: `
+      <div class="space-y-5 ff-body text-base text-black font-medium">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="rounded-xl p-5" style="background:#702082; border:2px solid #000;">
+            <p class="font-bold mb-2 uppercase tracking-wide text-base" style="color:#FFD700;">
+              Marching Season (Fall)
+            </p>
+            <p class="text-white leading-relaxed">
+              Color Guard is a fully integrated component of the Pure Gold Band.
+              All band attendance, uniform, conduct, and grading policies apply in full.
+            </p>
+          </div>
+          <div class="rounded-xl p-5" style="background:#f3f4f6; border:2px solid #000;">
+            <p class="font-bold mb-2 uppercase tracking-wide text-base text-black">
+              Independent Season (Spring)
+            </p>
+            <p class="text-black leading-relaxed">
+              Winter Guard operates as a distinct ensemble. Requirements communicated
+              by Head Guard Instructor Ms. Angelina Torres.
+            </p>
+          </div>
+        </div>
+        <p class="text-black">
+          <strong>Letter Jackets:</strong> Guard participation earns the same cumulative points
+          as band (9th = 10, 10th = 15, 11th = 25). Members must complete the full semester
+          of fitting to receive their award.
+        </p>
+        <p class="text-black">
+          All Guard-specific questions on uniforms, fees, and scheduling go directly to Ms. Torres.
+        </p>
+      </div>`
+  }
+];
+
+
+/* ══════════════════════════════════════════════════════════════
+   RENDER ENGINE — do not edit
+   ══════════════════════════════════════════════════════════════ */
+
+function initAnnouncement() {
+  if (CONFIG.announcement.trim()) {
+    const banner = document.getElementById('announcement-banner');
+    document.getElementById('announcement-text').textContent = CONFIG.announcement;
+    banner.classList.add('visible');
+  }
+}
+
+function initLastUpdated() {
+  let fmt;
+  try {
+    const d = new Date(document.lastModified);
+    if (isNaN(d.getTime()) || d.getFullYear() < 2020) throw new Error('invalid');
+    fmt = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch (_) {
+    fmt = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  ['hero-updated', 'footer-updated'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = fmt;
+  });
+}
+
+/* Director cards: WHITE bg with BLACK 2px border, BLACK text */
+function renderDirectors() {
+  document.getElementById('director-grid').innerHTML = DIRECTORS.map(d => `
+    <div class="bg-white rounded-xl p-5 flex gap-4 shadow-sm" style="border:2px solid #000;">
+      <div class="avatar">${d.initials}</div>
+      <div class="min-w-0">
+        <h3 class="ff-display text-lg font-bold text-black leading-snug">${d.name}</h3>
+        <p class="ff-body text-sm font-bold uppercase tracking-wide mt-1 mb-2" style="color:#4d155a;">${d.title}</p>
+        <p class="ff-body text-black text-sm leading-relaxed font-medium">${d.bio}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleStaff() {
+  document.getElementById('staff-acc').classList.toggle('open');
+  document.getElementById('staff-chevron').classList.toggle('open');
+}
+
+/* Handbook accordion: WHITE card with BLACK 2px border. Expanded panel: white with black top border */
+function renderHandbook() {
+  document.getElementById('handbook-accordion').innerHTML = HANDBOOK.map((s, i) => `
+    <div class="rounded-2xl overflow-hidden bg-white shadow-md" style="border:2px solid #000;">
+      <button onclick="toggleAcc('hacc-${i}','hchev-${i}')"
+              class="w-full flex items-center justify-between
+                     px-6 py-5 bg-white hover:bg-gray-100 text-left transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl leading-none" aria-hidden="true">${s.icon}</span>
+          <span class="ff-display text-xl font-bold text-black">${s.title}</span>
+        </div>
+        <svg id="hchev-${i}" class="acc-chevron w-6 h-6 flex-shrink-0" style="color:#4d155a;"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div id="hacc-${i}" class="acc-body">
+        <div class="px-6 pb-7 pt-5 bg-white" style="border-top:2px solid #000;">
+          ${s.body}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleAcc(bodyId, chevId) {
+  document.getElementById(bodyId).classList.toggle('open');
+  document.getElementById(chevId).classList.toggle('open');
+}
+
+/* Booster roster: WHITE rows with BLACK divide. Role: dark purple. Name: black. Email: black */
+function renderBoosters() {
+  document.getElementById('booster-roster').innerHTML = BOOSTERS.map(b => `
+    <div class="brow flex items-center justify-between px-5 py-4" style="border-top:1px solid #d1d5db;">
+      <div>
+        <p class="ff-body text-sm font-bold uppercase tracking-wide" style="color:#4d155a;">${b.role}</p>
+        <p class="ff-body text-base font-bold text-black mt-0.5">${b.name}</p>
+      </div>
+      ${b.email
+        ? `<a href="mailto:${b.email}"
+               class="hidden sm:block text-sm text-black font-semibold
+                      hover:underline ff-body" style="color:#000;">${b.email}</a>`
+        : ''}
+    </div>
+  `).join('');
+}
+
+/* Photo cards: WHITE bg with BLACK border. Thumbnail: black/purple gradient */
+function renderPhotos() {
+  const el = document.getElementById('photo-grid');
+
+  if (!CONFIG.photoSources.length) {
+    el.innerHTML = `
+      <div class="col-span-3 text-center py-20 rounded-2xl bg-white" style="border:2px solid #000;">
+        <p class="text-6xl mb-5">📷</p>
+        <p class="ff-body text-base text-black font-medium">
+          Photo gallery links will appear here after the first performance of the season.
+        </p>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = CONFIG.photoSources.map(s => {
+    const has = s.url && s.url.trim();
+    const tag = has ? `a href="${s.url}" target="_blank" rel="noopener"` : 'div';
+    return `
+      <${tag} class="photo-card block bg-white rounded-2xl overflow-hidden shadow-md ${!has ? 'opacity-70' : ''}"
+              style="border:2px solid #000;">
+        <div class="h-48 flex items-center justify-center"
+             style="background:linear-gradient(135deg,#4d155a,#000);">
+          <span class="text-7xl" aria-hidden="true">${s.icon}</span>
+        </div>
+        <div class="p-6">
+          <h4 class="ff-display text-xl font-bold text-black">${s.label}</h4>
+          <p class="ff-body text-black text-base mt-2 font-medium">${s.description}</p>
+          <span class="inline-block mt-4 text-base font-bold" style="color:#4d155a;">
+            ${has ? s.cta + ' ↗' : 'Coming Soon'}
+          </span>
+        </div>
+      </${has ? 'a' : 'div'}>`;
+  }).join('');
+}
+
+/* Shop cards: gray-800 bg with WHITE border on BLACK page. Text: WHITE */
+function renderShop() {
+  document.getElementById('shop-grid').innerHTML = CONFIG.shopItems.map(item => `
+    <a href="${item.url}" ${item.external ? 'target="_blank" rel="noopener"' : ''}
+       class="shop-card flex gap-5 rounded-2xl p-7"
+       style="background:#1f2937; border:2px solid #fff;">
+      <span class="text-5xl leading-none flex-shrink-0" aria-hidden="true">${item.icon}</span>
+      <div>
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <h3 class="ff-display text-xl font-bold text-white">${item.label}</h3>
+          <span class="text-xs ff-body font-bold px-2.5 py-1 rounded-full uppercase tracking-wide"
+                style="background:#FFD700; color:#000;">${item.badge}</span>
+        </div>
+        <p class="ff-body text-white text-base leading-relaxed font-medium">${item.description}</p>
+        <span class="inline-block mt-4 font-bold text-base" style="color:#FFD700;">
+          ${item.url.startsWith('mailto') ? 'Send Email ↗' : 'Visit Store ↗'}
+        </span>
+      </div>
+    </a>
+  `).join('');
+}
+
+function initScrollSpy() {
+  const links    = document.querySelectorAll('.nav-a');
+  const sections = document.querySelectorAll('section[id]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting)
+        links.forEach(l =>
+          l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)
+        );
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => obs.observe(s));
+}
+
+/* ── Boot ── */
+document.addEventListener('DOMContentLoaded', () => {
+  initAnnouncement();
+  initLastUpdated();
+  renderDirectors();
+  renderHandbook();
+  renderBoosters();
+  renderPhotos();
+  renderShop();
+  initScrollSpy();
+
+  /* Mobile nav toggle */
+  const btn   = document.getElementById('mob-btn');
+  const menu  = document.getElementById('mob-menu');
+  const oIcon = document.getElementById('mob-icon-open');
+  const cIcon = document.getElementById('mob-icon-close');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const hidden = menu.classList.toggle('hidden');
+      oIcon.classList.toggle('hidden', !hidden);
+      cIcon.classList.toggle('hidden', hidden);
+    });
+    document.querySelectorAll('.mob-a').forEach(a =>
+      a.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        oIcon.classList.remove('hidden');
+        cIcon.classList.add('hidden');
+      })
+    );
+  }
+});
+</script>
+</body>
+</html>
